@@ -1,0 +1,42 @@
+<div [@routerTransition] id="dbody" style="width: 1000px;">
+  <h2><i _ngcontent-c7="" class="fa fa-angle-double-right"></i>GitHub</h2>
+</div>
+
+<div class="card" style="width: 1000px;">
+  <div class="card-header">
+    <form [formGroup]="formulario">
+      <div class="form-content">
+
+        <div class="form-group">
+          <input type="text" formControlName="usuario" id="usuario" class="form-control input-underline input-lg"
+            placeholder="Usuário do GitHub">
+            <app-error-msg [control]="formulario.get('usuario')" label="Usuário do GitHub"></app-error-msg>
+        </div>
+        <div class="float-right">
+          <button type="button" class="btn btn-primary" (click)="buscarRepos()">Repositórios</button>
+          <button type="button" class="btn btn-primary" (click)="buscarStarred()">Starred</button>
+        </div>
+      </div>
+      <div class="card-body" *ngIf="exibirTabela">
+        <p-table [columns]="colunas" [value]="resultado" [loading]="loading">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field" ariaLabel="Ordenar" ariaLabelDesc="Decrecente" ariaLabelAsc="Crescente">
+                </p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </form>
+  </div>
+</div>
