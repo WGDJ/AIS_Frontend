@@ -4,6 +4,9 @@
 
 <div class="card" style="width: 1000px;">
   <div class="card-header">
+    <label *ngIf="nome">
+        <p style="font-weight:bold">Nome: {{nome}}</p>
+    </label>
     <form [formGroup]="formulario">
       <div class="form-content">
 
