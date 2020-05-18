@@ -45,7 +45,10 @@ export class GitHubComponent implements OnInit {
       usuario: ['', Validators.required]
     });
 
+    console.log(this.route.snapshot.paramMap.get('user'));
+
     this.buscarUser(this.route.snapshot.paramMap.get('user'));
+    debugger
     this.formulario.setValue({
       usuario: this.route.snapshot.paramMap.get('user')
     });
@@ -113,7 +116,6 @@ export class GitHubComponent implements OnInit {
           }),
           tap(_ => {
             this.loading = false
-            debugger
             if(Array.isArray(this.resultado) && this.resultado.length == 0 ){
               this.exibirTabela = false;
               this.alertService.showAlertSuccess('Não foram encontrados repositórios starred.');
